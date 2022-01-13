@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TippyTec.Views.NewTip"
+             Title="Nuevo Tip">
+    <ContentPage.Content>
+        <StackLayout Padding="16">
+            <Entry
+                Placeholder="Título" 
+                Text="{Binding NewTip.Title}"
+                Keyboard="Text"></Entry>
+            <Entry
+                Placeholder="Descripción" 
+                Text="{Binding NewTip.Description}"
+                Keyboard="Text"></Entry>
+            <!--<DatePicker Date="{Binding NewTip.CreatedDate}">
+                <DatePicker.Format>ddd dd MMM, yyyy</DatePicker.Format>
+            </DatePicker>-->
+            <Picker 
+                Title="Autor"
+                SelectedItem="{Binding NewTip.Author}"
+                ItemsSource="{Binding Authors}"
+                ItemDisplayBinding="{Binding Name}"></Picker>
+            <Button Text="Guardar"
+                    VerticalOptions="End"
+                    HorizontalOptions="End"
+                    Padding="32,0"
+                    Command="{Binding SaveTipCommand}"
+                    TextColor="White"
+                    BackgroundColor="#2196F3"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TippyTec.Tips"
+             Title="TippyTec">
+
+    <StackLayout>
+        <StackLayout BackgroundColor="#2196F3" Padding="24">
+            <Label Text="¡La app donde puedes organizar tus ideas!" HorizontalTextAlignment="Center" TextColor="White" FontSize="18" ></Label>
+        </StackLayout>
+        <CollectionView
+            x:Name="cvwTips" 
+            ItemsSource="{Binding Tips}"
+            EmptyView="No hay tips todavía. Agrega algunos con el botón de abajo.">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BackgroundColor="AliceBlue">
+                        <StackLayout>
+                            <Grid HeightRequest="100">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width=".85*"></ColumnDefinition>
+                                    <ColumnDefinition Width=".15*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height=".6*"></RowDefinition>
+                                    <RowDefinition Height=".4*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Label Text="{Binding Title}"
+                                       Grid.Column="0"
+                                       Grid.Row="0"
+                                       FontSize="24"
+                                       Padding="16,0"
+                                       VerticalOptions="End"></Label>
+                                <Label Text="{Binding CreatedDate}"
+                                       Grid.Column="0"
+                                       Padding="16,0"
+                                       VerticalOptions="Start"
+                                       Grid.Row="1"></Label>
+                                <ImageButton
+                                    Grid.Column="1"
+                                    Grid.RowSpan="2"
+                                    Source="ic_delete.png"
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding Path=BindingContext.DeleteTipCommand, Source={x:Reference cvwTips}}" CommandParameter="{Binding}"></ImageButton>
+                            </Grid>
+                        </StackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Path=BindingContext.ShowTipCommand, Source={x:Reference cvwTips}}" CommandParameter="{Binding}"></TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+        <Button HorizontalOptions="End" 
+                VerticalOptions="EndAndExpand"
+                Text="NUEVO TIP"
+                Padding="32,16"
+                Margin="32"
+                Command="{Binding MoveToNewTipCommand}"
+                BackgroundColor="#2196F3"
+                TextColor="White"></Button>
+    </StackLayout>
+
+</ContentPage>
